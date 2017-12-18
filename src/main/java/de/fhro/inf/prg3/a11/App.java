@@ -24,7 +24,7 @@ public class App {
     private static final Calendar currentDate = Calendar.getInstance();
     private static int currentCanteenId = -1;
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         MenuSelection selection;
         /* loop while true to get back to the menu every time an action was performed */
         do {

@@ -1,0 +1,11 @@
+@startuml MealsRetrievalFlow
+
+(*) --> "Retrieve canteen state"
+if "canteen.isOpen()" then
+ -->[true] "Retrieve meals"
+ --> (*)
+else
+-->[false] "Return empty list"
+--> (*)
+endif
+@enduml
