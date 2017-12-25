@@ -40,7 +40,7 @@ public interface OpenMensaAPI {
      * @return state of the mensa - may be closed or !closed
      */
     @GET("canteens/{canteenId}/days/{date}")
-    CompletableFuture<State> getMensaState(@Path("canteenId") int canteenId, @Path("date") String date);
+    CompletableFuture<State> getCanteenState(@Path("canteenId") int canteenId, @Path("date") String date);
 
     /**
      * Retrieve the meals for specified date served at canteen specified by its id
