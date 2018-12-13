@@ -5,12 +5,10 @@ import de.thro.inf.prg3.a11.openmensa.OpenMensaAPIService;
 import de.thro.inf.prg3.a11.openmensa.model.Canteen;
 import de.thro.inf.prg3.a11.openmensa.model.Meal;
 import de.thro.inf.prg3.a11.openmensa.model.PageInfo;
-import de.thro.inf.prg3.a11.util.ListUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.IntStream;
 
@@ -18,7 +16,7 @@ import java.util.stream.IntStream;
  * @author Peter Kurfer
  * Created on 12/16/17.
  */
-public class App {
+public class App2 {
 	private static final String OPEN_MENSA_DATE_FORMAT = "yyyy-MM-dd";
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat(OPEN_MENSA_DATE_FORMAT, Locale.getDefault());
@@ -63,6 +61,7 @@ public class App {
 		openMensaAPI.getCanteens().thenApply(response -> {
 			System.out.print("#");
 			PageInfo pageInfo = PageInfo.extractFromResponse(response);
+
 			List<Canteen> allCanteens;
 
 			/* unwrapping the response body */
@@ -73,29 +72,21 @@ public class App {
 				allCanteens = response.body();
 			}
 
-			/* declare variable to be able to use `thenCombine` */
-			CompletableFuture<List<Canteen>> remainingCanteensFuture = null;
-
+			/* iterate all pages
+			 * 2 to including 8 because page index is not 0 indexed */
 			for (int i = 2; i <= pageInfo.getTotalCountOfPages(); i++) {
 				System.out.print("#");
-				/* if we're fetching the first page the future is null and has to be assigned */
-				if (remainingCanteensFuture == null) {
-					remainingCanteensFuture = openMensaAPI.getCanteens(i);
-				} else {
-					/* from the second page on the futures are combined
-					 * to combine a future with another you have to provide a function to combine the results */
-					remainingCanteensFuture = remainingCanteensFuture.thenCombine(openMensaAPI.getCanteens(i), ListUtil::mergeLists);
+				try {
+					/* you can block this thread with `get` because we are already in a
+					 * background thread because of `thenApply` */
+					allCanteens.addAll(openMensaAPI.getCanteens(i).get());
+				} catch (InterruptedException | ExecutionException e) {
+					System.out.println("Error while retrieving canteens");
 				}
 			}
 
-			try {
-				/* collect all retrieved in one list */
-				allCanteens.addAll(remainingCanteensFuture.get());
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
-			}
 			System.out.println("]");
-			/* sort the retrieved canteens by their ids and return them */
+			/* sort the canteens by their id and return them */
 			allCanteens.sort(Comparator.comparing(Canteen::getId));
 			return allCanteens;
 		}).thenAccept(canteens -> {
@@ -207,3 +198,4 @@ public class App {
 		}
 	}
 }
+
