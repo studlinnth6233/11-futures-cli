@@ -1,6 +1,8 @@
-_This is an assignment to the class [Programmieren 3](https://hsro-inf-prg3.github.io) at the [University of Applied Sciences Rosenheim](http://www.fh-rosenheim.de)._
+_This is an assignment to the class [Programmieren 3](https://hsro-inf-prg3.github.io) at the [Technical University of Applied Sciences Rosenheim](https://www.th-rosenheim.de)._
 
 # Assignment 11: Futures - CLI variant
+
+[![](https://travis-ci.org/hsro-inf-prg3/11-futures-cli.svg?branch=master)](https://travis-ci.org/hsro-inf-prg3/11-futures-cli)
 
 This assignment covers the more advanced multithreading topics _futures_ and _future chaining_.
 Futures are a feature of Java 8 and can be compared to the concept of _promises_ in JavaScript.
