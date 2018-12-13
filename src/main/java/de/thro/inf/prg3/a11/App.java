@@ -1,7 +1,7 @@
-package de.fhro.inf.prg3.a11;
+package de.thro.inf.prg3.a11;
 
-import de.fhro.inf.prg3.a11.openmensa.OpenMensaAPI;
-import de.fhro.inf.prg3.a11.openmensa.OpenMensaAPIService;
+import de.thro.inf.prg3.a11.openmensa.OpenMensaAPI;
+import de.thro.inf.prg3.a11.openmensa.OpenMensaAPIService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

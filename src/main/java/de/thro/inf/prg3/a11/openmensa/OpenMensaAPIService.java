@@ -1,4 +1,4 @@
-package de.fhro.inf.prg3.a11.openmensa;
+package de.thro.inf.prg3.a11.openmensa;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

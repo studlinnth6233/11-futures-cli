@@ -1,27 +1,17 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
-    }
+plugins {
+	id 'java'
+	id 'application'
 }
 
-// Apply the java plugin to add support for Java
-apply plugin: 'java'
-
-// Apply the application plugin to add support for building an application
-apply plugin: 'application'
-
-apply plugin: 'com.github.ben-manes.versions'
+sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
-    jcenter()
+	mavenCentral()
+	jcenter()
 }
 
 // Define the main class for the application
-mainClassName = 'App'
+mainClassName = 'de.thro.inf.prg3.a11.App'
 
 dependencies {
     /* Commons Lang3 */
@@ -32,9 +22,16 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
 
     /* JUnit 5 */
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
-    testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}")
+	testCompile("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+	testRuntime("org.junit.jupiter:junit-jupiter-params:${junitVersion}")
     testRuntime("org.apache.logging.log4j:log4j-core:${log4jVersion}")
     testRuntime("org.apache.logging.log4j:log4j-jul:${log4jVersion}")
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
 }

@@ -1,9 +1,7 @@
-package de.fhro.inf.prg3.a11.openmensa.model;
+package de.thro.inf.prg3.a11.openmensa.model;
 
 import okhttp3.Headers;
 import retrofit2.Response;
-
-import java.util.function.Function;
 
 /**
  * Utility class to handle HTTP response header containing the pagination information

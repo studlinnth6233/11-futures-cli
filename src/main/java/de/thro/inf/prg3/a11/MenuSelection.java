@@ -1,4 +1,4 @@
-package de.fhro.inf.prg3.a11;
+package de.thro.inf.prg3.a11;
 
 /**
  * @author Peter Kurfer

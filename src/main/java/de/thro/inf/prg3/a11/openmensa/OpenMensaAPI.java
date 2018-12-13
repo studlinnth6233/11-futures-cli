@@ -1,8 +1,8 @@
-package de.fhro.inf.prg3.a11.openmensa;
+package de.thro.inf.prg3.a11.openmensa;
 
-import de.fhro.inf.prg3.a11.openmensa.model.Canteen;
-import de.fhro.inf.prg3.a11.openmensa.model.Meal;
-import de.fhro.inf.prg3.a11.openmensa.model.State;
+import de.thro.inf.prg3.a11.openmensa.model.Canteen;
+import de.thro.inf.prg3.a11.openmensa.model.Meal;
+import de.thro.inf.prg3.a11.openmensa.model.State;
 import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
