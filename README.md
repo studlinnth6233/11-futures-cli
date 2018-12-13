@@ -20,16 +20,6 @@ _This is the CLI variant of the assignment. There's also an [Android variant](ht
 
 _Remark: the given unit tests won't succeed until you have completed the first part of this assignment as they require the `CompletableFuture<>` Call Adapter registered in Retrofit!_
 
-## Retrofit Call Adapter
-
-To be able to use the given `OpenMensaAPI` interface with Retrofit you have to do some extra work.
-Retrofit is able to return `CompletableFuture<>` but you have to register a [Call Adapter](https://github.com/square/retrofit/wiki/Call-Adapters) to enable this feature.
-
-To accomplish this you have to include another dependency in the `build.gradle`-file and register the adapter within the Retrofit builder (`.addCallAdapterFactory(...)`).
-
-To validate that the Call Adapter is registered correctly run the given unit tests.
-They're also a good starting point to get an idea how to use the API with `Future<>`s instead of the Retrofit specific `Call<>` objects.
-
 ## Retrieving all canteens
 
 The given CLI application has a menu which asks the user which action he wants to perform.
