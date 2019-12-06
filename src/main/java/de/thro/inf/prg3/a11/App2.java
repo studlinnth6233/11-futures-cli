@@ -26,7 +26,7 @@ public class App2 {
 	private static int currentCanteenId = -1;
 
 	public static void main(String[] args) throws ExecutionException, InterruptedException {
-		MenuSelection selection;
+		MenuStrategy selection;
 		/* loop while true to get back to the menu every time an action was performed */
 		do {
 			selection = menu();
@@ -173,7 +173,7 @@ public class App2 {
 	 *
 	 * @return user selection as MenuSelection
 	 */
-	private static MenuSelection menu() {
+	private static MenuStrategy menu() {
 		IntStream.range(0, 20).forEach(i -> System.out.print("#"));
 		System.out.println();
 		System.out.println("1) Show canteens");
@@ -186,15 +186,15 @@ public class App2 {
 
 		switch (inputScanner.nextInt()) {
 			case 1:
-				return MenuSelection.SHOW_CANTEENS;
+				return MenuStrategy.SHOW_CANTEENS;
 			case 2:
-				return MenuSelection.SET_CANTEEN;
+				return MenuStrategy.SET_CANTEEN;
 			case 3:
-				return MenuSelection.SHOW_MEALS;
+				return MenuStrategy.SHOW_MEALS;
 			case 4:
-				return MenuSelection.SET_DATE;
+				return MenuStrategy.SET_DATE;
 			default:
-				return MenuSelection.QUIT;
+				return MenuStrategy.QUIT;
 		}
 	}
 }
