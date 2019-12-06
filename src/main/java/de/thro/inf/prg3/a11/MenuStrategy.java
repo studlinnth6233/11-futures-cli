@@ -84,7 +84,7 @@ public enum MenuStrategy {
 		boolean readDate = false;
 		do {
 			try {
-				System.out.println("Pleae enter date in the format yyyy-mm-dd:");
+				System.out.println("Please enter date in the format yyyy-mm-dd:");
 				Date d = dateFormat.parse(inputScanner.next());
 				currentDate.setTime(d);
 				readDate = true;

@@ -28,7 +28,7 @@ The following actions are available (Actions are implemented as an `enum` in `Me
 * Set date - reads a date string and updates the currently selected date
 * Show meals - retrieves all meals of the currently selected canteen and date and prints them to the STDOUT
 
-The first step is to complete the `SHOW_CANTEENS` strategy method.
+The first step is to complete the `SHOW_CANTEENS` strategy.
 The following flow chart shows how to proceed :
 
 ![Canteen retrieval](./assets/images/CanteenRetrievalFlow.svg)
@@ -52,8 +52,8 @@ But no matter which approach you're chosing you have to wait for all responses t
 
 ## Retrieve the meals of a day
 
-The second (and last) step is to complete the method `printMeals()`.
-This method should retrieve the meals of specific day served at a specified canteen.
+The second (and last) step is to complete the MenuStrategy `SHOW_MEALS`.
+This strategy should retrieve the meals of specific day served at a specified canteen.
 
 The following flow chart shows how to proceed:
 
