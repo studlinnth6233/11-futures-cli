@@ -5,12 +5,10 @@ import de.thro.inf.prg3.a11.openmensa.OpenMensaAPIService;
 import de.thro.inf.prg3.a11.openmensa.model.Canteen;
 import de.thro.inf.prg3.a11.openmensa.model.Meal;
 import de.thro.inf.prg3.a11.openmensa.model.PageInfo;
-import de.thro.inf.prg3.a11.util.ListUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public enum MenuStrategy {
@@ -49,7 +47,7 @@ public enum MenuStrategy {
 
 					System.out.println("]");
 					/* sort the canteens by their id and return them */
-					allCanteens.sort(Comparator.comparing(Canteen::getId));
+					allCanteens.sort(Comparator.comparing(c -> c.getId()));
 					return allCanteens;
 				}).thenAccept(canteens -> {
 					/* print all canteens to STDOUT */

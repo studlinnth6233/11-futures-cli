@@ -1,8 +1,7 @@
-_This is an assignment to the class [Programmieren 3](https://hsro-inf-prg3.github.io) at the [Technical University of Applied Sciences Rosenheim](https://www.th-rosenheim.de)._
+_This is an assignment to the class [Advanced Programming](https://hsro-inf-fpk.github.io) at the [University of Applied Sciences Rosenheim](http://www.th-rosenheim.de)._
+
 
 # Assignment 11: Futures - CLI variant
-
-[![](https://travis-ci.org/hsro-inf-prg3/11-futures-cli.svg?branch=master)](https://travis-ci.org/hsro-inf-prg3/11-futures-cli)
 
 This assignment covers the more advanced multithreading topics _futures_ and _future chaining_.
 Futures are a feature of Java 8 and can be compared to the concept of _promises_ in JavaScript.
@@ -10,7 +9,6 @@ Futures are a feature of Java 8 and can be compared to the concept of _promises_
 The internet contains lots of good articles about `Future<>` and `CompletableFuture<>` in Java.
 For example [this one](http://www.deadcoderising.com/java8-writing-asynchronous-code-with-completablefuture/) covers everything you need to know for this assignment.
 
-_This is the CLI variant of the assignment. There's also an [Android variant](https://github.com/hsro-inf-prg3/11-futures-android) which covers the same concepts. **You don't have to implement both!** If you want to switch between them you should be able to copy most of the code you already wrote (except a few platform adoptions)._
 
 ## Setup
 
@@ -23,14 +21,14 @@ _Remark: the given unit tests won't succeed until you have completed the first p
 ## Retrieving all canteens
 
 The given CLI application has a menu which asks the user which action he wants to perform.
-The following actions are available:
+The following actions are available (Actions are implemented as an `enum` in `MenuStrategy`) :
 
 * Show canteens - retrieves all canteens and prints them (including the id) to the STDOUT
 * Set canteen - reads an integer as canteen id
 * Set date - reads a date string and updates the currently selected date
 * Show meals - retrieves all meals of the currently selected canteen and date and prints them to the STDOUT
 
-The first step is to complete the `printCanteens()` method.
+The first step is to complete the `SHOW_CANTEENS` strategy method.
 The following flow chart shows how to proceed :
 
 ![Canteen retrieval](./assets/images/CanteenRetrievalFlow.svg)
