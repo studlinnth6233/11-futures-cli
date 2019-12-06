@@ -25,17 +25,7 @@ public enum MenuStrategy {
 	SET_CANTEEN {
 		@Override
 		void execute() {
-			/* typical input reading pattern */
-			boolean readCanteenId = false;
-			do {
-				try {
-					System.out.println("Enter canteen id:");
-					currentCanteenId = inputScanner.nextInt();
-					readCanteenId = true;
-				} catch (Exception e) {
-					System.out.println("Sorry could not read the canteen id");
-				}
-			} while (!readCanteenId);
+			readCanteen();
 		}
 	},
 	SHOW_MEALS {
@@ -46,25 +36,10 @@ public enum MenuStrategy {
 			 * don't forget to check if a canteen was selected previously! */
 		}
 	},
-	/**
-	 * Utility method to read a date and update the calendar
-	 */
 	SET_DATE {
 		@Override
 		void execute() {
-			/* typical input reading pattern */
-			boolean readDate = false;
-			do {
-				try {
-					System.out.println("Pleae enter date in the format yyyy-mm-dd:");
-					Date d = dateFormat.parse(inputScanner.next());
-					currentDate.setTime(d);
-					readDate = true;
-				} catch (ParseException p) {
-					System.out.println("Sorry, the entered date could not be parsed.");
-				}
-			} while (!readDate);
-
+			readDate();
 		}
 	},
 	QUIT {
@@ -84,7 +59,27 @@ public enum MenuStrategy {
 	private static final Calendar currentDate = Calendar.getInstance();
 	private static int currentCanteenId = -1;
 
-	protected void setCanteenID() {
+	/**
+	 * Utility method to select a canteen
+	 */
+	protected static void readCanteen() {
+		/* typical input reading pattern */
+		boolean readCanteenId = false;
+		do {
+			try {
+				System.out.println("Enter canteen id:");
+				currentCanteenId = inputScanner.nextInt();
+				readCanteenId = true;
+			} catch (Exception e) {
+				System.out.println("Sorry could not read the canteen id");
+			}
+		} while (!readCanteenId);
+	}
+
+	/**
+	 * Utility method to read a date and update the calendar
+	 */
+	protected static void readDate() {
 		/* typical input reading pattern */
 		boolean readDate = false;
 		do {
@@ -97,5 +92,6 @@ public enum MenuStrategy {
 				System.out.println("Sorry, the entered date could not be parsed.");
 			}
 		} while (!readDate);
+
 	}
 }
