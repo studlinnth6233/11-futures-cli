@@ -31,7 +31,7 @@ public enum MenuStrategy
 							int pageMax = PageInfo.extractFromResponse(response).getTotalCountOfPages();
 							int pageCur = PageInfo.extractFromResponse(response).getCurrentPageIndex();
 
-							for (int page = pageCur + 1; page < pageMax; page++)
+							for (int page = pageCur + 1; page < pageMax; page ++)
 							{
 								try
 								{
@@ -79,9 +79,9 @@ public enum MenuStrategy
 					try
 					{
 						openMensaAPI.getCanteenState(currentCanteenId, dateFormat.format(currentDate.getTime()))
-							.thenApplyAsync(response ->
+							.thenApplyAsync(state ->
 							{
-								if (!response.isClosed())
+								if (!state.isClosed())
 								{
 									try
 									{
@@ -96,10 +96,10 @@ public enum MenuStrategy
 
 								return new ArrayList<Meal>();
 							})
-							.thenAccept(meals ->
+							.thenAcceptAsync(meals ->
 							{
 								meals.stream()
-									.map(meal -> meal.getName())
+									.map(Meal::getName)
 									.forEach(System.out::println);
 							})
 							.get();
@@ -132,7 +132,6 @@ public enum MenuStrategy
 	abstract void execute();
 
 	private static final String OPEN_MENSA_DATE_FORMAT = "yyyy-MM-dd";
-
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat(OPEN_MENSA_DATE_FORMAT, Locale.getDefault());
 	private static final Scanner inputScanner = new Scanner(System.in);
 	private static final OpenMensaAPI openMensaAPI = OpenMensaAPIService.getInstance().getOpenMensaAPI();
@@ -146,6 +145,7 @@ public enum MenuStrategy
 	{
 		/* typical input reading pattern */
 		boolean readCanteenId = false;
+
 		do
 		{
 			try
@@ -153,11 +153,14 @@ public enum MenuStrategy
 				System.out.println("Enter canteen id:");
 				currentCanteenId = inputScanner.nextInt();
 				readCanteenId = true;
-			} catch (Exception e)
+			}
+
+			catch (Exception e)
 			{
 				System.out.println("Sorry could not read the canteen id");
 			}
-		} while (!readCanteenId);
+		}
+		while (!readCanteenId);
 	}
 
 	/**
@@ -167,6 +170,7 @@ public enum MenuStrategy
 	{
 		/* typical input reading pattern */
 		boolean readDate = false;
+
 		do
 		{
 			try
@@ -175,11 +179,13 @@ public enum MenuStrategy
 				Date d = dateFormat.parse(inputScanner.next());
 				currentDate.setTime(d);
 				readDate = true;
-			} catch (ParseException p)
+
+			}
+			catch (ParseException p)
 			{
 				System.out.println("Sorry, the entered date could not be parsed.");
 			}
-		} while (!readDate);
-
+		}
+		while (!readDate);
 	}
 }
