@@ -6,14 +6,17 @@ import java.util.Scanner;
  * @author Peter Kurfer
  * Created on 12/16/17.
  */
-public class App {
+public class App
+{
 
 	private static final Scanner inputScanner = new Scanner(System.in);
 
-	public static void main(String[] args) {
-		MenuStrategy selection ;
+	public static void main(String[] args)
+	{
+		MenuStrategy selection;
 		/* loop while true to get back to the menu every time an action was performed */
-		while (true) {
+		while (true)
+		{
 			selection = menu();
 			selection.execute();
 		}
@@ -24,7 +27,8 @@ public class App {
 	 *
 	 * @return user selection as MenuSelection
 	 */
-	private static MenuStrategy menu() {
+	private static MenuStrategy menu()
+	{
 		System.out.println("##########################");
 		System.out.println();
 		System.out.println("1) Show canteens");
@@ -35,7 +39,8 @@ public class App {
 		System.out.println("##########################");
 		System.out.println();
 
-		switch (inputScanner.nextInt()) {
+		switch (inputScanner.nextInt())
+		{
 			case 1:
 				return MenuStrategy.SHOW_CANTEENS;
 			case 2:

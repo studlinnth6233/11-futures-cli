@@ -10,7 +10,8 @@ import retrofit2.Response;
  * @author Peter Kurfer
  */
 
-public final class PageInfo {
+public final class PageInfo
+{
 
 	private static final String TOTAL_PAGES_HEADER = "X-Total-Pages";
 	private static final String TOTAL_ITEM_COUNT_HEADER = "X-Total-Count";
@@ -26,7 +27,8 @@ public final class PageInfo {
 	 * Default constructor
 	 * only used by 'factory method' `extractFromReponse(...)`
 	 */
-	private PageInfo(int totalCountOfPages, int totalCountOfItems, int itemCountPerPage, int currentPageIndex) {
+	private PageInfo(int totalCountOfPages, int totalCountOfItems, int itemCountPerPage, int currentPageIndex)
+	{
 		this.totalCountOfPages = totalCountOfPages;
 		this.totalCountOfItems = totalCountOfItems;
 		this.itemCountPerPage = itemCountPerPage;
@@ -38,9 +40,11 @@ public final class PageInfo {
 	 *
 	 * @param apiResponse response object to parse
 	 * @param <T>         concrete response type
+	 *
 	 * @return PageInfo instance - may contain default fallback values see getters
 	 */
-	public static <T extends Response<?>> PageInfo extractFromResponse(T apiResponse) {
+	public static <T extends Response<?>> PageInfo extractFromResponse(T apiResponse)
+	{
 		Headers headers = apiResponse.headers();
 		int totalPages = extractFromHeaders(headers, TOTAL_PAGES_HEADER, -1);
 		int totalItemCount = extractFromHeaders(headers, TOTAL_ITEM_COUNT_HEADER, -1);
@@ -50,7 +54,8 @@ public final class PageInfo {
 		return new PageInfo(totalPages, totalItemCount, itemCountPerPage, currentPageIndex);
 	}
 
-	private static int extractFromHeaders(Headers headers, String headerName, int fallback) {
+	private static int extractFromHeaders(Headers headers, String headerName, int fallback)
+	{
 		String headerValue = headers.get(headerName);
 		return headerValue == null ? fallback : Integer.parseInt(headerValue);
 	}
@@ -58,28 +63,32 @@ public final class PageInfo {
 	/**
 	 * @return total count of pages or -1 if required header was not present
 	 */
-	public int getTotalCountOfPages() {
+	public int getTotalCountOfPages()
+	{
 		return totalCountOfPages;
 	}
 
 	/**
 	 * @return total item count or -1 if required header was not present
 	 */
-	public int getTotalCountOfItems() {
+	public int getTotalCountOfItems()
+	{
 		return totalCountOfItems;
 	}
 
 	/**
 	 * @return item count on every page or -1 if required header was not present
 	 */
-	public int getItemCountPerPage() {
+	public int getItemCountPerPage()
+	{
 		return itemCountPerPage;
 	}
 
 	/**
 	 * @return current page index or -1 if required header was not present
 	 */
-	public int getCurrentPageIndex() {
+	public int getCurrentPageIndex()
+	{
 		return currentPageIndex;
 	}
 }

@@ -14,7 +14,8 @@ import java.util.concurrent.CompletableFuture;
 /**
  * @author Peter Kurfer
  */
-public interface OpenMensaAPI {
+public interface OpenMensaAPI
+{
 
 	/**
 	 * Retrieve the first page of all canteens
@@ -30,6 +31,7 @@ public interface OpenMensaAPI {
 	 * does not include the response wrapper because the required information should be retrieved before this method is used
 	 *
 	 * @param pageNumber index of the page to retrieve
+	 *
 	 * @return List of canteens as async future
 	 */
 	@GET("canteens")
@@ -40,6 +42,7 @@ public interface OpenMensaAPI {
 	 *
 	 * @param canteenId id of the canteen
 	 * @param date      date for which the state should be looked up
+	 *
 	 * @return state of the mensa - may be closed or !closed
 	 */
 	@GET("canteens/{canteenId}/days/{date}")
@@ -50,6 +53,7 @@ public interface OpenMensaAPI {
 	 *
 	 * @param canteenId id of the canteen
 	 * @param date      date for which the meals should be retrieved
+	 *
 	 * @return List of meals wrapped as async future
 	 */
 	@GET("canteens/{canteenId}/days/{date}/meals")

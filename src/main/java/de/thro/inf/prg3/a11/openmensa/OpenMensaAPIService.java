@@ -10,13 +10,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author Peter Kurfer
  */
 
-public final class OpenMensaAPIService {
+public final class OpenMensaAPIService
+{
 
 	/* singleton instance */
 	private static final OpenMensaAPIService ourInstance = new OpenMensaAPIService();
 	private final OpenMensaAPI openMensaAPI;
 
-	private OpenMensaAPIService() {
+	private OpenMensaAPIService()
+	{
 
 		/* Initialize Retrofit */
 		Retrofit retrofit = new Retrofit.Builder()
@@ -28,11 +30,13 @@ public final class OpenMensaAPIService {
 	}
 
 	/* singleton accessor */
-	public static OpenMensaAPIService getInstance() {
+	public static OpenMensaAPIService getInstance()
+	{
 		return ourInstance;
 	}
 
-	public OpenMensaAPI getOpenMensaAPI() {
+	public OpenMensaAPI getOpenMensaAPI()
+	{
 		return openMensaAPI;
 	}
 }

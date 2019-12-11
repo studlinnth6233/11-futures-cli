@@ -10,33 +10,40 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * @author Peter Kurfer
  */
 
-public final class State {
+public final class State
+{
 
 	private String date;
 	private boolean closed = true;
 
-	public State() {
+	public State()
+	{
 		date = "";
 	}
 
-	public String getDate() {
+	public String getDate()
+	{
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(String date)
+	{
 		this.date = date;
 	}
 
-	public boolean isClosed() {
+	public boolean isClosed()
+	{
 		return closed;
 	}
 
-	public void setClosed(boolean closed) {
+	public void setClosed(boolean closed)
+	{
 		this.closed = closed;
 	}
 
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(Object o)
+	{
 		if (this == o) return true;
 
 		if (!(o instanceof State)) return false;
@@ -50,7 +57,8 @@ public final class State {
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode()
+	{
 		return new HashCodeBuilder(17, 37)
 			.append(getDate())
 			.append(isClosed())
@@ -58,7 +66,8 @@ public final class State {
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return new ToStringBuilder(this)
 			.append("date", date)
 			.append("closed", closed)

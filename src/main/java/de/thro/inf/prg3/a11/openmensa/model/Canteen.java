@@ -9,60 +9,73 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * @author Peter Kurfer
  */
 
-public final class Canteen {
+public final class Canteen
+{
 	private int id;
 	private String name;
 	private String city;
 	private String address;
 	private double[] coordinates;
 
-	public int getId() {
+	public int getId()
+	{
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(int id)
+	{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public String getCity() {
+	public String getCity()
+	{
 		return city;
 	}
 
-	public void setCity(String city) {
+	public void setCity(String city)
+	{
 		this.city = city;
 	}
 
-	public String getAddress() {
+	public String getAddress()
+	{
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(String address)
+	{
 		this.address = address;
 	}
 
-	public double[] getCoordinates() {
+	public double[] getCoordinates()
+	{
 		return coordinates;
 	}
 
-	public void setCoordinates(double[] coordinates) {
+	public void setCoordinates(double[] coordinates)
+	{
 		this.coordinates = coordinates;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return String.format("%s\t%s", getId(), getName());
 	}
 
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(Object o)
+	{
 		if (this == o) return true;
 
 		if (!(o instanceof Canteen)) return false;
@@ -79,7 +92,8 @@ public final class Canteen {
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode()
+	{
 		return new HashCodeBuilder(17, 37)
 			.append(getId())
 			.append(getName())
