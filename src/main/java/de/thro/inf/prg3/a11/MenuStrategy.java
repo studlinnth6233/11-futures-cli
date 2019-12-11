@@ -3,6 +3,7 @@ package de.thro.inf.prg3.a11;
 import de.thro.inf.prg3.a11.openmensa.OpenMensaAPI;
 import de.thro.inf.prg3.a11.openmensa.OpenMensaAPIService;
 import de.thro.inf.prg3.a11.openmensa.model.Canteen;
+import de.thro.inf.prg3.a11.openmensa.model.Meal;
 import de.thro.inf.prg3.a11.openmensa.model.PageInfo;
 
 import java.text.ParseException;
@@ -23,7 +24,7 @@ public enum MenuStrategy
 				try
 				{
 					openMensaAPI.getCanteens()
-						.thenApply(response ->
+						.thenApplyAsync(response ->
 						{
 							List<Canteen> canteens = response.body();
 
@@ -45,7 +46,7 @@ public enum MenuStrategy
 
 							return canteens;
 						})
-						.thenAccept(canteens ->
+						.thenAcceptAsync(canteens ->
 						{
 							canteens.stream()
 								.map(canteen -> String.format("[%d] : %s", canteen.getId(), canteen.getName()))
@@ -73,9 +74,42 @@ public enum MenuStrategy
 			@Override
 			void execute()
 			{
-				/* TODO fetch all meals for the currently selected canteen
-				 * to avoid errors retrieve at first the state of the canteen and check if the canteen is opened at the selected day
-				 * don't forget to check if a canteen was selected previously! */
+				if (currentCanteenId > 0)
+				{
+					try
+					{
+						openMensaAPI.getCanteenState(currentCanteenId, dateFormat.format(currentDate.getTime()))
+							.thenApplyAsync(response ->
+							{
+								if (!response.isClosed())
+								{
+									try
+									{
+										return openMensaAPI.getMeals(currentCanteenId, dateFormat.format(currentDate.getTime())).get();
+									}
+
+									catch (InterruptedException | ExecutionException e)
+									{
+										e.printStackTrace();
+									}
+								}
+
+								return new ArrayList<Meal>();
+							})
+							.thenAccept(meals ->
+							{
+								meals.stream()
+									.map(meal -> meal.getName())
+									.forEach(System.out::println);
+							})
+							.get();
+					}
+
+					catch (InterruptedException | ExecutionException e)
+					{
+						e.printStackTrace();
+					}
+				}
 			}
 		},
 	SET_DATE
