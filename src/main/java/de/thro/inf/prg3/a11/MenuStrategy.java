@@ -2,13 +2,13 @@ package de.thro.inf.prg3.a11;
 
 import de.thro.inf.prg3.a11.openmensa.OpenMensaAPI;
 import de.thro.inf.prg3.a11.openmensa.OpenMensaAPIService;
+import de.thro.inf.prg3.a11.openmensa.model.Canteen;
+import de.thro.inf.prg3.a11.openmensa.model.PageInfo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 public enum MenuStrategy
 {
@@ -18,11 +18,46 @@ public enum MenuStrategy
 			@Override
 			void execute()
 			{
-				System.out.print("Fetching canteens [");
-				/* TODO fetch all canteens and print them to STDOUT
-				 * at first get a page without an index to be able to extract the required pagination information
-				 * afterwards you can iterate the remaining pages
-				 * keep in mind that you should await the process as the user has to select canteen with a specific id */
+				System.out.println("Fetching canteens ...");
+
+				try
+				{
+					openMensaAPI.getCanteens()
+						.thenApply(response ->
+						{
+							List<Canteen> canteens = response.body();
+
+							int pageMax = PageInfo.extractFromResponse(response).getTotalCountOfPages();
+							int pageCur = PageInfo.extractFromResponse(response).getCurrentPageIndex();
+
+							for (int page = pageCur + 1; page < pageMax; page++)
+							{
+								try
+								{
+									canteens.addAll(openMensaAPI.getCanteens(page).get());
+								}
+
+								catch (InterruptedException | ExecutionException e)
+								{
+									e.printStackTrace();
+								}
+							}
+
+							return canteens;
+						})
+						.thenAccept(canteens ->
+						{
+							canteens.stream()
+								.map(canteen -> String.format("[%d] : %s", canteen.getId(), canteen.getName()))
+								.forEach(System.out::println);
+						})
+						.get();
+				}
+
+				catch (InterruptedException | ExecutionException e)
+				{
+					e.printStackTrace();
+				}
 			}
 		},
 	SET_CANTEEN
